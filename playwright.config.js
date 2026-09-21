@@ -12,6 +12,7 @@ dotenv.config({ path: 'D:/Playwright/Automation Practice/.env' });
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  timeout: 30000, // 60 seconds
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -25,6 +26,8 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    baseURL: process.env.BASE_URL,
+    
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
@@ -35,10 +38,18 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+            name: 'setup',
+            testDir: '.',
+            testMatch: /auth\.setup\.js/,
+        },
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
     },
-
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },

@@ -14,7 +14,7 @@ class MyInfo {
         this.Nationality = page.locator('//body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]');
         this.MaritialStatus = page.locator('//div[@class="orangehrm-horizontal-padding orangehrm-vertical-padding"]//div[2]//div[1]//div[2]//div[1]//div[1]//div[1]');
         this.DOB = page.locator("(//input[@placeholder='yyyy-dd-mm'])[2]");
-        this.Gender = page.locator("(//div[@class='oxd-input-group'])[2]");
+        this.Gender = page.locator("//input[@value='1']");
         this.Savebtn = page.locator("(//button[@type='submit'][normalize-space()='Save'])[1]");
     }
 
@@ -33,6 +33,15 @@ class MyInfo {
         await this.page.waitForTimeout(5000); // Wait for 2 seconds to allow the success message to appear
         //Click Personal Details
         await this.PersonalDetails.click();
+    }
+    async PersonalDetailsData(){
+        await this.OtherID.fill();
+        await this.LicExpDate.fill();
+        await this.Nationality.SelectOption();
+        await this.MaritialStatus.SelectOption();
+        await this.DOB.fill();
+        await this.Gender.check();
+        await this.Savebtn.click();
 
     }
 }

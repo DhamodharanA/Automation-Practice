@@ -5,8 +5,8 @@ test('login', async ({ page }) => {
 
     await page.goto('/');
 
-    await page.getByPlaceholder('Username').fill(process.env.USER_NAME);
-    await page.getByPlaceholder('Password').fill(process.env.PASSWORD);
+    await page.getByPlaceholder('Username').fill(process.env.USER_NAME_2);
+    await page.getByPlaceholder('Password').fill(process.env.PASSWORD_2);
 
     await page.getByRole('button', { name: 'Login' }).click();
 

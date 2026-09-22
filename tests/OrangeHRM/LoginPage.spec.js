@@ -1,28 +1,24 @@
 const { test, expect } = require('@playwright/test');
-const XLSX = require('xlsx');
 const { LoginPage } = require('../../pages/LoginPage');
-const { asyncWrapProviders } = require('node:async_hooks');
+const { readExcel } = require('../../utils/excelUtils');
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
-const workbook = XLSX.readFile('./test-data/OrangeHRM_Login_TestData.xlsx');
-const sheet = workbook.Sheets.Sheet1;
-const loginData = XLSX.utils.sheet_to_json(sheet);
-
+const data = readExcel('OrangeHRM_Login_TestData.xlsx', 'Sheet1');
 test.describe('Login Page Tests', () => {
-    for (const data of loginData) {
-        test(`${data.TC_ID || data.TestType} Login`, async ({ page }) => {
+    for (const data1 of data) {
+        test(`${data1.TC_ID || data1.TestType} Login`, async ({ page }) => {
             const loginPage = new LoginPage(page);
             await loginPage.gotoLoginPage();
-            //const username = data.Username === 'empty' ? '' : data.Username || '';
-            //const password = data.Password === 'empty' ? '' : data.Password || '';
+            const username = data1.Username === 'empty' ? '' : data1.Username || '';
+            const password = data1.Password === 'empty' ? '' : data1.Password || '';
             await loginPage.login(username, password);
 
-            if (data.TestType === 'Positive') {
+            if (data1.TestType === 'Positive') {
                 await expect(page).toHaveURL(/dashboard/);
                 await loginPage.logout();
             } else {
-                await expect(page.getByText(data.ExpectedResult).first()).toBeVisible();
+                await expect(page.getByText(data1.ExpectedResult).first()).toBeVisible();
             }
         });
     }

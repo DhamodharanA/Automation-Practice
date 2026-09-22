@@ -1,6 +1,6 @@
 npx playwright test HomePageTest.spec.js
 
-npx playwright test tests/OrangeHRM/MyLogin.spec.js --project chromium --headed
+npx playwright test tests/OrangeHRM/LoginPage.spec.js --project chromium --headed
 
 npx playwright test tests/OrangeHRM/MyLogin.spec.js --project=chromium --headed --grep "MyInfo"
 
@@ -16,23 +16,58 @@ allure generate allure-results --clean
 
 allure open allure-report
 
+
 Automation Practice/
 │
 ├── tests/
-│   └── OrangeHRM/
-│       ├── LoginPage.spec.js
-│       └── MyLogin.spec.js
+│   ├── OrangeHRM/
+│   │   ├── LoginPage.spec.js
+│   │   ├── MyInfo.spec.js
+│   │   └── Dashboard.spec.js
+│   │
+│   └── API/
+│       └── LoginAPI.spec.js
 │
 ├── pages/
 │   ├── LoginPage.js
-│   └── DashboardPage.js
+│   ├── DashboardPage.js
+│   ├── MyInfoPage.js
+│   └── AdminPage.js
 │
 ├── utils/
-│   ├── testData.js
-│   ├── excelUtils.js
-│   ├── commonUtils.js
-│   └── dateUtils.js
+│   ├── ExcelUtils.js
+│   ├── TestDataUtils.js
+│   ├── DateUtils.js
+│   └── CommonUtils.js
 │
+├── fixtures/
+│   ├── test-fixtures.js
+│   └── auth.fixture.js
+│
+├── test-data/
+│   ├── OrangeHRM_Login_TestData.xlsx
+│   └── users.json
+│
+├── playwright/
+│   └── .auth/
+│       └── user.json
+│
+├── config/
+│   ├── dev.env
+│   ├── qa.env
+│   └── prod.env
+│
+├── reports/
+│
+├── screenshots/
+│
+├── test-results/
+│
+├── playwright-report/
+│
+├── auth.setup.js
 ├── playwright.config.js
+├── package.json
 ├── .env
-└── package.json
+├── .gitignore
+└── README.md

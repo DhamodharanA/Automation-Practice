@@ -1,7 +1,10 @@
 const{test,expect}=require('@playwright/test');
 const {LoginPage}=require('../../pages/LoginPage');
 const {MyInfo}=require('../../pages/MyInfo');
+const { selectDate, selectDropdown, selectRadio } =
+    require('../../utils/CommonUtils');
 const dotenv=require('dotenv');
+const { utils } = require('xlsx');
 dotenv.config();
 
 test.describe('MyLogin',()=> {
@@ -23,6 +26,15 @@ test.describe('MyInfo',()=> {
         
         const myInfo=new MyInfo(page);
         await myInfo.gotoMyInfo();
-        await expect(myInfo.Successmsg).toHaveText('Successfully Updated');
+        //await expect(myInfo.Successmsg).toHaveText('Successfully Updated');
+        //await myInfo.OtherID.fill('12345');
+        await selectDate(myInfo.LicExpDate, '2026-12-31');
+        await selectDropdown(page, myInfo.Nationality, 'Indian');
+        await selectDropdown(page, myInfo.MaritialStatus, 'Single');
+        await selectDate(myInfo.DOB, '1995-05-20');
+        await selectRadio(myInfo.Gender);
+        await myInfo.Savebtn.click();
+
+        await expect(page.locator('text=Successfully Saved')).toBeVisible();
     });
-});
+    });

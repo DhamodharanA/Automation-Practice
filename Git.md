@@ -7,9 +7,7 @@
 5  git config --global --list
 6  git add .
 7  git status
-8  git commit -m "Initial Playwright automation project"
+8  git commit -m "Initial Playwright automation project" ---IMP
 9  git remote add origin https://github.com/DhamodharanA/Automation-Practice.git
 10 git branch -M main
    git push -u origin main 
-
-11 

@@ -33,16 +33,13 @@ class MyInfo {
         await this.page.waitForTimeout(5000); // Wait for 2 seconds to allow the success message to appear
         //Click Personal Details
         await this.PersonalDetails.click();
-    }
-    async PersonalDetailsData(){
-        await this.OtherID.fill();
+        //await this.OtherID.fill();
         await this.LicExpDate.fill();
-        await this.Nationality.SelectOption();
-        await this.MaritialStatus.SelectOption();
-        await this.DOB.fill();
+        await this.Nationality.selectOption();
+        await this.MaritialStatus.selectOption();
+        //await this.DOB.fill();
         await this.Gender.check();
         await this.Savebtn.click();
-
     }
 }
 

@@ -27,11 +27,11 @@ test.describe('MyInfo',()=> {
         const myInfo=new MyInfo(page);
         await myInfo.gotoMyInfo();
         //await expect(myInfo.Successmsg).toHaveText('Successfully Updated');
-        //await myInfo.OtherID.fill('12345');
+        //await myInfo.OtherID.fill('12345'); //Field have error
         await selectDate(myInfo.LicExpDate, '2026-12-31');
         await selectDropdown(page, myInfo.Nationality, 'Indian');
         await selectDropdown(page, myInfo.MaritialStatus, 'Single');
-        await selectDate(myInfo.DOB, '1995-05-20');
+        //await selectDate(myInfo.DOB, '1995-05-20'); //Field Diabled
         await selectRadio(myInfo.Gender);
         await myInfo.Savebtn.click();
 
